@@ -14,6 +14,7 @@ grouped by audience.
 
 ## Validation & results
 - [`REVIEWER_GUIDE.md`](REVIEWER_GUIDE.md) - claim-to-evidence map and quick verdict path for skeptical review
+- [`../notebooks/06_reviewer_replication.ipynb`](../notebooks/06_reviewer_replication.ipynb) - notebook walk-through of frozen reviewer evidence
 - [`VALIDATION_RESULTS.md`](VALIDATION_RESULTS.md) — cross-validation against GMAT, REBOUND, independent libraries
 - [`REAL_BENCHMARKS.md`](REAL_BENCHMARKS.md) — benchmarks on real data
 - [`SENSITIVITY.md`](SENSITIVITY.md) — sensitivity / parameter studies

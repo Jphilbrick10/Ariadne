@@ -36,6 +36,17 @@ Expected release evidence for `1.0.0rc2`:
 The exact launch checklist is tracked in
 [`PUBLIC_LAUNCH_AUDIT.md`](PUBLIC_LAUNCH_AUDIT.md).
 
+For a frozen hash-addressed evidence bundle, inspect
+[`data/benchmarks/reviewer_evidence/reviewer_evidence_manifest.md`](../data/benchmarks/reviewer_evidence/reviewer_evidence_manifest.md)
+or rebuild it with:
+
+```bash
+PYTHONPATH=src python scripts/build_reviewer_evidence_manifest.py
+```
+
+A notebook walk-through is available at
+[`notebooks/06_reviewer_replication.ipynb`](../notebooks/06_reviewer_replication.ipynb).
+
 ## Claim-To-Evidence Map
 
 | Public claim | Primary evidence | Reproducibility path | What it does not prove |
@@ -48,6 +59,7 @@ The exact launch checklist is tracked in
 | Real-data discovery results are reported honestly | `docs/VALIDATION_RESULTS.md`, `docs/REAL_BENCHMARKS.md`, `docs/FRONTIER_FINDINGS.md` | Compare stored benchmark artifacts to the documented null findings | Null results do not prove no objects exist in deeper or unqueried surveys |
 | Solar/interplanetary navigation tools are exploratory research engines | `docs/SOLAR_SYSTEM_NAVIGATOR.md`, `data/benchmarks/solar_navigator_benchmark/`, `src/ariadne/interplanetary/` | Run examples and benchmark scripts for specific scenarios | Does not certify globally optimal mission design across all constraints |
 | Public release hygiene has been checked | `docs/PUBLIC_LAUNCH_AUDIT.md`, `CITATION.cff`, `SECURITY.md`, `LICENSE` | Re-run the audit commands and inspect git-tracked files | Full-repo cosmetic lint remains a known non-gate |
+| Frozen reviewer evidence is hash-addressed | `data/benchmarks/reviewer_evidence/` | `PYTHONPATH=src python scripts/build_reviewer_evidence_manifest.py` | Hashes prove artifact integrity, not scientific truth by themselves |
 
 ## Deep Review Path
 

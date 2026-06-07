@@ -165,6 +165,8 @@ than the public MPC bar.
   table, headline results, honest limitations.
 - [`docs/REVIEWER_GUIDE.md`](docs/REVIEWER_GUIDE.md) — claim-to-evidence map for skeptical
   scientific review.
+- [`notebooks/06_reviewer_replication.ipynb`](notebooks/06_reviewer_replication.ipynb) —
+  notebook walk-through of the frozen reviewer evidence manifest and corpus.
 - [`MASTER_PLAN.md`](MASTER_PLAN.md) — full vision, prior art, CR3BP foundations, validation
   roadmap (45 stages, all gates green).
 - [`docs/PUBLIC_LAUNCH_AUDIT.md`](docs/PUBLIC_LAUNCH_AUDIT.md) — exact public-release

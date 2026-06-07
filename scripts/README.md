@@ -55,6 +55,7 @@ network access and, for NOIRLab Data Lab, `DATALAB_USER` / `DATALAB_PASS`.
 
 ## Benchmarks & proof artifacts
 - `reviewer_quickcheck.py` - one-command local reviewer audit; writes a JSON evidence report
+- `build_reviewer_evidence_manifest.py` - frozen hash manifest for public review evidence
 - `run_discovery_benchmark.py`, `benchmark_engine_improvement.py`, `benchmark_image_pipeline.py` - benchmark drivers
 - `benchmark_solar_navigator.py`, `benchmark_transport_admissibility.py` - navigation/transport benchmarks
 - `build_closure_report.py`, `build_dream_run.py`, `build_artifact_manifest.py`, `build_external_inference_benchmark.py` - proof/closure artifacts

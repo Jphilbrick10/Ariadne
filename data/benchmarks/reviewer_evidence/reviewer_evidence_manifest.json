@@ -1,0 +1,208 @@
+{
+  "certificate_hash": "71a3ecdadcb55b09bb04459965e10b386f9b6dd74d41d15b601908baaa3a04a9",
+  "created_utc": "2026-06-07T02:42:43.543949+00:00",
+  "file_count": 17,
+  "files": [
+    {
+      "bytes": 13754,
+      "claim": "Top-level project claims and honest scope.",
+      "line_count": 217,
+      "path": "README.md",
+      "role": "public_entrypoint",
+      "sha256": "c3ebe3c53312736c8a4d8bda99d3a5b3a59deb4a9ea994f0ad3f065a19939e19"
+    },
+    {
+      "bytes": 6418,
+      "claim": "Claim-to-evidence review path.",
+      "line_count": 121,
+      "path": "docs/REVIEWER_GUIDE.md",
+      "role": "review_map",
+      "sha256": "eaadf1dab5b4a3dee0e4e3562d7ee360c4f3d1a9ebb82b397b345a7e611dceb0"
+    },
+    {
+      "bytes": 3858,
+      "claim": "Commands run for public launch.",
+      "line_count": 70,
+      "path": "docs/PUBLIC_LAUNCH_AUDIT.md",
+      "role": "release_audit",
+      "sha256": "2f6aa14c116dab735ec3d3985d4e8b7fc60bbc233e5d8717b9462cc9b698daa3"
+    },
+    {
+      "bytes": 13621,
+      "claim": "Methods, validation, and limitations.",
+      "line_count": 203,
+      "path": "docs/WHITE_PAPER.md",
+      "role": "scientific_narrative",
+      "sha256": "a0bba8ffb26bce5aa76d029ab5173ebcbab635c4ae9640ddd6f93a0e73bc0360"
+    },
+    {
+      "bytes": 46459,
+      "claim": "Discovery pipeline validation results.",
+      "line_count": 865,
+      "path": "docs/VALIDATION_RESULTS.md",
+      "role": "validation_report",
+      "sha256": "654f8bb1fc7bb5ead33474fe8b12db18160727950d776d41503dc3937300d652"
+    },
+    {
+      "bytes": 1484,
+      "claim": "Real-data benchmark summary.",
+      "line_count": 54,
+      "path": "docs/REAL_BENCHMARKS.md",
+      "role": "real_data_report",
+      "sha256": "4e75ae336707d53198dd6f8370c7d9c41dab5143190d4833b71e33f52096ee36"
+    },
+    {
+      "bytes": 17038,
+      "claim": "Readiness ledger.",
+      "line_count": 575,
+      "path": "data/benchmarks/closure/closure_report.json",
+      "role": "closure_ledger",
+      "sha256": "5dc01b9e5901ef1415c0f918c231f066eba86e2c695dd7e4e76670e618df7820",
+      "summary": {
+        "certificate_hash": "4a65a794e70cdf3d42025890a1257ee2e28b1d9b96a71edf434f3361ee52375e",
+        "critical_failures": 0,
+        "readiness_score": 1.0,
+        "schema": "ariadne.closure_report.v1",
+        "status": "complete"
+      }
+    },
+    {
+      "bytes": 3113,
+      "claim": "Human-readable closure summary.",
+      "line_count": 43,
+      "path": "data/benchmarks/closure/closure_report.md",
+      "role": "closure_summary",
+      "sha256": "f6351ad0f909c3a82b7a76ef2d00581f997eac3cd0c33b7b908b15d9901057c2"
+    },
+    {
+      "bytes": 2510,
+      "claim": "500-case MPC-derived labelled corpus manifest.",
+      "line_count": 51,
+      "path": "data/benchmarks/real_corpus_mpc_500/corpus_manifest.json",
+      "role": "frozen_labelled_corpus_manifest",
+      "sha256": "c7076711bb43d708f012d03bee2d72593279bd9f89c36385c96791ae67c29803",
+      "summary": {
+        "case_hash": "220af135ce69a710684df8cee967b4bb8484c7beca5473bdc6447edec95856f0",
+        "n_cases": 500,
+        "schema": "ariadne.discovery.real_corpus_manifest.v1"
+      }
+    },
+    {
+      "bytes": 362093,
+      "claim": "Frozen labelled cases used by the real-corpus benchmark.",
+      "line_count": 500,
+      "path": "data/benchmarks/real_corpus_mpc_500/labelled_cases.jsonl",
+      "role": "frozen_labelled_cases",
+      "sha256": "7830bd7b19d0d78e1aae21ec5805b18fb0b1f69bc302a589b0ac94ddc5bc6a97"
+    },
+    {
+      "bytes": 163445,
+      "claim": "Accuracy/calibration metrics for the frozen labelled corpus.",
+      "line_count": 1,
+      "path": "data/benchmarks/real_corpus_mpc_500/benchmark/metrics.json",
+      "role": "real_corpus_metrics",
+      "sha256": "067d59dc51d06dac0058ed28195955d5a7a225ab93b4e60acf8e2994a194c15a",
+      "summary": {
+        "accuracy": 1.0,
+        "certificate_hash": "da3b6fedff6aba7eac3c2b5bd6e1274ea2c7c7ba7888b1f0c18388938b8ff7ed",
+        "macro_f1": 1.0,
+        "safe_accuracy": 1.0
+      }
+    },
+    {
+      "bytes": 69,
+      "claim": "Reliability curve for calibration review.",
+      "line_count": 2,
+      "path": "data/benchmarks/real_corpus_mpc_500/benchmark/reliability_curve.csv",
+      "role": "real_corpus_reliability",
+      "sha256": "925e913a8598741d555eb8864e60969872590ca90c3d3f6f3c3e8414f2a1c33b"
+    },
+    {
+      "bytes": 753918,
+      "claim": "External inference benchmark metrics.",
+      "line_count": 1,
+      "path": "data/benchmarks/external_inference/metrics.json",
+      "role": "external_inference_metrics",
+      "sha256": "4636c503a52365406c5a7697be9e5d7c5df08f31b313c24a69db2ecf5f2e36dd",
+      "summary": {
+        "accuracy": 0.9995833333333334,
+        "certificate_hash": "f4dcc79032333b5f959e6696a62cc43084ca78c0f51983a4d5465492d7ddee57",
+        "macro_f1": 0.9848484848484849,
+        "safe_accuracy": 1.0
+      }
+    },
+    {
+      "bytes": 84725,
+      "claim": "Adversarial false-positive benchmark metrics.",
+      "line_count": 1,
+      "path": "data/benchmarks/inference_adversarial_builtin/metrics.json",
+      "role": "adversarial_metrics",
+      "sha256": "b5eb626b97c86b5feb466f1b570d26bea6e5806c3590c061f5e04c6fcaba4b2e",
+      "summary": {
+        "accuracy": 0.7466666666666667,
+        "certificate_hash": "d4b816e11380dbd85b4b31efb7d09ffe3b743a8978e5bbc262fb6661d8748584",
+        "macro_f1": 0.6080020989111898,
+        "safe_accuracy": 1.0
+      }
+    },
+    {
+      "bytes": 14300,
+      "claim": "Full benchmark artifact hash manifest.",
+      "line_count": 375,
+      "path": "data/benchmarks/artifact_integrity/artifact_manifest.json",
+      "role": "artifact_integrity_manifest",
+      "sha256": "d333646b74e10414cc6951ce18fb6b49a46d1092144cbc1c531ed06caaeded03",
+      "summary": {
+        "certificate_hash": "caf5b32bf61a337b43f6c4ac13ed36cbec53c6a4f87dfed3493112afd4849931",
+        "schema": "ariadne.artifact_integrity_manifest.v1"
+      }
+    },
+    {
+      "bytes": 548,
+      "claim": "Citation and release metadata.",
+      "line_count": 18,
+      "path": "CITATION.cff",
+      "role": "citation_metadata",
+      "sha256": "e079661d8e9b27754efd6b4df0d57e761741527ade68a9be6eeb38b0bc0751bd"
+    },
+    {
+      "bytes": 4672,
+      "claim": "PolyForm Noncommercial license text.",
+      "line_count": 134,
+      "path": "LICENSE",
+      "role": "license",
+      "sha256": "772505897bc3cc6f375d69d309d488577b90741d1dbb91e566b026bfaf0fd912"
+    }
+  ],
+  "limits": [
+    "Source-available under PolyForm Noncommercial, not OSI open-source.",
+    "Frozen MPC corpus is useful evidence, not a blind NOIRLab/ZTF/LSST competition.",
+    "Network-backed external benchmarks should be rerun before new scientific claims.",
+    "Operational mission design still requires certified workflows such as GMAT/Monte/Copernicus."
+  ],
+  "missing": [],
+  "repro_commands": [
+    {
+      "command": "PYTHONPATH=src python scripts/reviewer_quickcheck.py",
+      "name": "reviewer_quickcheck",
+      "purpose": "Run production lint, fast tests, strict docs, and closure ledger."
+    },
+    {
+      "command": "python scripts/build_closure_report.py --fail-on-critical",
+      "name": "closure_ledger",
+      "purpose": "Regenerate closure evidence and fail on critical residuals."
+    },
+    {
+      "command": "PYTHONPATH=src python -m ariadne.validate.stage24",
+      "name": "stage24_packaging",
+      "purpose": "Verify installability, license metadata, CI, and core imports."
+    },
+    {
+      "command": "PYTHONPATH=src python -m ariadne.validate.stage32",
+      "name": "stage32_selector",
+      "purpose": "Verify ensemble backend faithfulness and selector calibration."
+    }
+  ],
+  "schema": "ariadne.reviewer_evidence_manifest.v1",
+  "status": "complete"
+}

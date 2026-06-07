@@ -10,6 +10,7 @@ suitable for opening in JupyterLab / VS Code / Colab.
 | [`03_manifold_transport.ipynb`](03_manifold_transport.ipynb) | L1↔L2 halo (~112 m/s) + NRHO↔L2 halo (~119 m/s) transport patches |
 | [`04_tno_orbit_fit.ipynb`](04_tno_orbit_fit.ipynb) | TNO orbit fit from real MPC astrometry (Sedna / Eris / Quaoar) |
 | [`05_helmholtz_hjb.ipynb`](05_helmholtz_hjb.ipynb) | Coherence-HJB sampled-graph Helmholtz on full 6D CR3BP |
+| [`06_reviewer_replication.ipynb`](06_reviewer_replication.ipynb) | Reviewer-facing evidence manifest, closure ledger, and frozen corpus walk-through |
 
 ## Install Jupyter
 
