@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = "LicenseRef-PolyForm-Noncommercial-1.0.0"
 license-files = ["LICENSE"]
-authors = [{ name = "Ariadne project contributors" }]
+authors = [{ name = "Coherence Energy Labs" }]
 keywords = [
     "astrodynamics", "CR3BP", "cislunar", "Gateway", "NRHO",
     "trajectory-optimization", "low-energy-transfer", "invariant-manifolds",

@@ -11,8 +11,8 @@ sys.path.insert(0, str(ROOT / "src"))
 
 # -- Project information -----------------------------------------------------
 project = "Ariadne"
-author = "Ariadne project contributors"
-copyright = "2026, Ariadne project contributors"
+author = "Coherence Energy Labs"
+copyright = "2026, Coherence Energy Labs"
 
 try:
     from ariadne import __version__ as version

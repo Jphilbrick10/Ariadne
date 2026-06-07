@@ -4,7 +4,7 @@ title: "Ariadne: Python-native cislunar mission design and TNO discovery toolkit
 version: "1.0.0rc2"
 date-released: "2026-06-05"
 authors:
-  - name: "Ariadne project contributors"
+  - name: "Coherence Energy Labs"
 repository-code: "https://github.com/Jphilbrick10/Ariadne"
 license: "LicenseRef-PolyForm-Noncommercial-1.0.0"
 keywords:

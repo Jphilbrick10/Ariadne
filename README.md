@@ -179,8 +179,9 @@ personal, academic, research, teaching, non-profit, and government. No fee, no
 sign-up: use it, fork it, build on it, publish from it; just keep the notice intact.
 
 **Commercial use requires a paid license** (use in a product/service you sell, internal
-for-profit business use, or paid consulting). See [COMMERCIAL-LICENSE.md](COMMERCIAL-LICENSE.md)
-or email **weareone@oneunity.earth**.
+for-profit business use including the for-profit arm of a non-profit, paid consulting, or
+building/training commercial AI/ML systems). See [COMMERCIAL-LICENSE.md](COMMERCIAL-LICENSE.md)
+or email **Josh@coherenceenergylabs.com**.
 
 Issues + PRs welcome on [GitHub](https://github.com/Jphilbrick10/Ariadne).
 Console commands after install: `ariadne-atlas` (build the open-release atlas bundle) and
