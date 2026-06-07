@@ -326,7 +326,7 @@ def characterize_variable(times, mags, magerrs=None, g_r=None) -> ObjectDossier:
         ]
     else:
         probs = {"variable-star": 0.7, "irregular": 0.3}
-        headline = f"symmetric variation {amp:.2f} mag -> variable star (periodicity TBD)"
+        headline = f"symmetric variation {amp:.2f} mag -> variable star (periodicity unresolved)"
         conf = "low"
         disamb.append("Lomb-Scargle period search -> RR Lyrae / Cepheid / eclipsing / Mira")
     props = {

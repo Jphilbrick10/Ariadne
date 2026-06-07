@@ -1,9 +1,9 @@
-"""Stage 24 validation gates (MASTER_PLAN.md - packaging + open-source).
+"""Stage 24 validation gates (MASTER_PLAN.md - packaging + source availability).
 
-G_pkg - The project is a real, installable, open-source package:
+G_pkg - The project is a real, installable, source-available package:
   (a) pyproject.toml declares the build system, name/version, runtime deps, and entry points;
   (b) the declared version matches ariadne.__version__;
-  (c) an OSI license (LICENSE) and a CI workflow (.github/workflows/ci.yml) are present;
+  (c) the PolyForm Noncommercial license and a CI workflow (.github/workflows/ci.yml) are present;
   (d) the package and its key subsystems import cleanly.
 
 Run:  PYTHONPATH=src python -m ariadne.validate.stage24
@@ -83,7 +83,7 @@ def check() -> tuple[bool, dict]:
 
 
 def main() -> int:
-    print("=== Ariadne Stage 24 validation  (packaging + open-source) ===\n")
+    print("=== Ariadne Stage 24 validation  (packaging + source availability) ===\n")
     ok, i = check()
     print("[G_pkg a] pyproject.toml")
     print(

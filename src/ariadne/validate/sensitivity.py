@@ -263,8 +263,9 @@ def make_population(
         e = float(rng.uniform(*e_range))
         i = float(rng.uniform(*i_range_deg))
         mag = float(rng.uniform(*mag_range))
-        # Rough rate estimate at opposition: 10 * (a/AU)^-1.5 for outer objects
-        rate = 30.0 / max(a, 0.5) ** 0.5  # placeholder; real opposition rate
+        # Apparent-rate proxy for coarse synthetic sensitivity sweeps; real-data
+        # validation uses measured detections and propagated ephemerides instead.
+        rate = 30.0 / max(a, 0.5) ** 0.5
         out.append(
             {
                 "a_au": a,

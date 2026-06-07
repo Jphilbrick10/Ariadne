@@ -4,7 +4,7 @@ Honest scope — what Ariadne is, and isn't
 What it **is**
 --------------
 
-An open, high-fidelity, Python-native CR3BP + cislunar mission-design + TNO-discovery
+Source-available, high-fidelity, Python-native CR3BP + cislunar mission-design + TNO-discovery
 toolkit built on standard gravity and real ephemerides, cross-validated against NASA GMAT.
 
 - **Validated**: every claim has an independent cross-check (GMAT, REBOUND, jplephem,

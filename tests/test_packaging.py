@@ -1,4 +1,4 @@
-"""Stage 24 tests: packaging metadata consistency + open-source artifacts."""
+"""Stage 24 tests: packaging metadata consistency + source-availability artifacts."""
 
 import os
 import re

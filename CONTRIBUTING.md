@@ -1,7 +1,7 @@
 # Contributing to Ariadne
 
-Thanks for considering a contribution. Ariadne is an open, validated astrodynamics
-toolkit; we want it to stay open, validated, and pleasant to work on.
+Thanks for considering a contribution. Ariadne is a source-available, validated
+astrodynamics toolkit; we want it to stay transparent, validated, and pleasant to work on.
 
 ## Quick start for contributors
 

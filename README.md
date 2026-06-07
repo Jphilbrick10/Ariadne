@@ -12,7 +12,7 @@
 The thread through the interplanetary labyrinth: a working, validated astrodynamics toolkit
 that fills the gap between heavyweight platforms (GMAT, Monte, Copernicus) and the existing
 Python libraries (poliastro, Tudat, Heyoka) for the things that fall between them, combined in
-one open, Python-native package — CR3BP-aware cislunar mission design, invariant-manifold
+one public source-available, Python-native package — CR3BP-aware cislunar mission design, invariant-manifold
 transport routing, and end-to-end TNO discovery from real survey astrometry.
 
 ## What you can do in 30 seconds
@@ -96,7 +96,7 @@ $ ariadne tutorial 5                 # run example #5 (Coherence-HJB) end-to-end
 
 ## Where Ariadne sits
 
-| Tool | Domain | Style | Open? |
+| Tool | Domain | Style | Availability |
 |---|---|---|---|
 | **GMAT** | Full ops mission design | C++/Java, GUI/script | yes (NASA) |
 | **Monte** | Operational trajectory | closed | no (JPL) |
@@ -104,7 +104,7 @@ $ ariadne tutorial 5                 # run example #5 (Coherence-HJB) end-to-end
 | **poliastro** | 2-body + perturbations | Python | yes |
 | **Tudat** | Academic OCP | C++/Python | yes |
 | **Heyoka** | High-precision propagation | C++/Python | yes |
-| **Ariadne** | **CR3BP + cislunar + TNO discovery** | **Python-native, tutorial-driven** | **yes** |
+| **Ariadne** | **CR3BP + cislunar + TNO discovery** | **Python-native, tutorial-driven** | **source-available, noncommercial** |
 
 ## Capabilities at a glance
 
@@ -144,7 +144,7 @@ Every claim is checked against an independent tool:
 
 ## Honest scope — what this is, and isn't
 
-**It is**: an open, high-fidelity, validated CR3BP + cislunar mission-design + TNO-discovery
+**It is**: a source-available, high-fidelity, validated CR3BP + cislunar mission-design + TNO-discovery
 engine built on standard gravity and real ephemerides, cross-validated against NASA GMAT.
 
 **It is not**:

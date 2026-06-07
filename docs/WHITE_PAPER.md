@@ -1,18 +1,18 @@
-# Ariadne: an open, validated engine for low-energy trajectory design and discovery
+# Ariadne: a source-available, validated engine for low-energy trajectory design and discovery
 
 **A from-scratch astrodynamics toolkit for the Interplanetary Transport Network — built on
 standard gravity, validated against NASA GMAT and JPL DE440, with an automated route-discovery
 layer and a multi-system atlas.**
 
 *Working paper. Standard gravity throughout (credibility firewall). Nothing in this work is new
-physics; the contribution is openness, validation, automation, and an honest accounting of what is
+physics; the contribution is transparency, validation, automation, and an honest accounting of what is
 and is not established.*
 
 ---
 
 ## Abstract
 
-We present **Ariadne**, an open engine that designs and discovers low-energy spaceflight routes in
+We present **Ariadne**, a source-available engine that designs and discovers low-energy spaceflight routes in
 the Circular Restricted Three-Body Problem (CR3BP) and its higher-fidelity extensions, up to the
 full JPL DE440 ephemeris and cross-validation against NASA's General Mission Analysis Tool (GMAT).
 The engine reproduces the published University of Coimbra Earth–Moon optimum (≈3,925 m/s, ~32 d) to

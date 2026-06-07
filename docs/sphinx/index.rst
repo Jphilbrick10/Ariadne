@@ -2,7 +2,7 @@ Ariadne documentation
 =====================
 
 **Python-native cislunar mission design + TNO discovery — validated, tutorial-driven,
-open source.**
+source-available.**
 
 Ariadne fills the gap between heavyweight astrodynamics platforms (GMAT, Monte,
 Copernicus) and the existing Python libraries (poliastro, Tudat, Heyoka) for the

@@ -137,7 +137,7 @@ def _index_markdown(atlas: dict, refs: list[dict]) -> str:
         "---",
         "",
         "Standard gravity throughout (credibility firewall). Nothing here is new physics; "
-        "the contribution is an open, validated, automated low-energy routing engine + atlas.",
+        "the contribution is a source-available, validated, automated low-energy routing engine + atlas.",
         "",
     ]
     return "\n".join(lines)

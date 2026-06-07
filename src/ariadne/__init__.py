@@ -3,7 +3,7 @@
 The classical astrodynamics tools (GMAT, Monte, Copernicus, STK) are heavyweight and
 GUI/script-driven; the popular Python libraries (poliastro, Tudat, Heyoka) are excellent
 but stop short of CR3BP-aware cislunar mission design or end-to-end TNO discovery.
-Ariadne fills that gap: a tutorial-driven, validated, open-source Python toolkit for
+Ariadne fills that gap: a tutorial-driven, validated, source-available Python toolkit for
 
   - CR3BP periodic-orbit families (Lyapunov, halos, NRHO) via continuation;
   - Invariant-manifold tubes + heteroclinic / Poincare-section connections;
