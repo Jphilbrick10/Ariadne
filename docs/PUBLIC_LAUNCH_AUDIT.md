@@ -5,6 +5,7 @@ Target version: 1.0.0rc2
 
 This is the reviewer-facing launch checklist for Ariadne. It records what was
 actually run before public release and keeps the scope scientifically honest.
+For a claim-by-claim evidence map, see [`REVIEWER_GUIDE.md`](REVIEWER_GUIDE.md).
 
 ## Verified Gates
 

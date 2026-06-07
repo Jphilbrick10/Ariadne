@@ -163,6 +163,8 @@ than the public MPC bar.
 - [`scripts/`](scripts/README.md) — index of the runnable tools and reproducible pipelines
 - [`docs/WHITE_PAPER.md`](docs/WHITE_PAPER.md) — capstone write-up: methods, full validation
   table, headline results, honest limitations.
+- [`docs/REVIEWER_GUIDE.md`](docs/REVIEWER_GUIDE.md) — claim-to-evidence map for skeptical
+  scientific review.
 - [`MASTER_PLAN.md`](MASTER_PLAN.md) — full vision, prior art, CR3BP foundations, validation
   roadmap (45 stages, all gates green).
 - [`docs/PUBLIC_LAUNCH_AUDIT.md`](docs/PUBLIC_LAUNCH_AUDIT.md) — exact public-release
