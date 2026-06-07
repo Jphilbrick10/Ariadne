@@ -1,0 +1,109 @@
+# Downloaded NASA SPICE kernels (large, fetched on demand; tracked via kernels.lock)
+data/kernels/*
+!data/kernels/kernels.lock.json
+*.bsp
+*.bpc
+*.tls
+*.tpc
+*.tf
+*.ti
+
+# Bundled GMAT install (~1 GB) and its run artifacts — never commit
+tools/
+*.report.txt
+
+# Generated results / atlas
+results/
+*.h5
+*.hdf5
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+build/
+dist/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Generated tutorial outputs (regenerate via `python examples/*.py`)
+# The 5 committed PNGs make the README render on GitHub without running the tutorials.
+examples_out/*
+!examples_out/0[1-7]_*.png
+
+# Scratch benchmarks at repo root (not committed -- the committed ones live in benchmarks/)
+/bench_*.py
+
+# Sphinx build output
+docs/sphinx/_build/
+
+# Discovery-engine cached data
+/signalbook-data/
+
+# Local real-survey acquisitions and diagnostics. These are regenerated or
+# downloaded by scripts and are too large/noisy to version directly.
+data/des_snc3/
+data/real_decam_recovery/
+data/real_decam_tracklet/
+data/real_decam_phase_a/
+data/decam_discovery_field/
+data/mpc_catalog/
+data/synth_fits/
+data/discovery/
+data/discovery_night_report/
+data/decam_night_report/
+.benchmarks/
+.coverage
+_*.log
+
+# --- Public-release safety: large data, caches, and automated-survey artifacts ---
+# Remaining DECam/NSC field data + caches not listed above (downloaded/regenerable)
+data/decam_deep_field/
+data/decam_benchmark/
+data/decam_e2e/
+data/real_decam_e2e/
+data/nsc_field/
+data/auto_fields/
+data/auto_runs/
+data/_lc_cache/
+data/_viz/
+data/calibration/
+# Broad safety nets so raw imagery / billion-row catalogs / the dev DB never commit
+*.fits
+*.fits.fz
+*.fz
+*.npz
+*.db
+MPCORB*
+# Automated-discovery state, ledger, reports, cached labels, calibrations (personal / regenerable)
+data/discovery_ledger.jsonl
+data/auto_discovery_state.json
+data/catalog_survey_state.json
+data/DISCOVERY_WATCH.md
+data/auto_survey.log
+data/*_calibrated.json
+data/jpl_orbit_class.json
+# Root-level scratch result JSONs from validation runs
+/_*.json
+# (data/survey_targets.txt is config and SHOULD be committed)
+data/cockpit_jobs/
+solar_system_planet_nine_3d.html
+
+# Frontier/anomaly scan scratch outputs. These are regenerated from public
+# catalog queries and should be promoted only through curated benchmark artifacts.
+data/anomaly_candidates.jsonl
+data/anomaly_scan_report.md
+data/coorbital_census.json
+data/frontier_tess_ledger.jsonl
+data/p9_dynamical_test.json
+data/tno_elements.json
+data/ztf_anomaly_hunt.jsonl
+data/scan_cache/

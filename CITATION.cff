@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use Ariadne in research, please cite the repository release and the validation artifacts."
+title: "Ariadne: Python-native cislunar mission design and TNO discovery toolkit"
+version: "1.0.0rc2"
+date-released: "2026-06-05"
+authors:
+  - name: "Ariadne project contributors"
+repository-code: "https://github.com/Jphilbrick10/Ariadne"
+license: "LicenseRef-PolyForm-Noncommercial-1.0.0"
+keywords:
+  - astrodynamics
+  - CR3BP
+  - cislunar
+  - trajectory optimization
+  - TNO discovery
+  - HelioLinC
+  - SPICE
+  - DE440

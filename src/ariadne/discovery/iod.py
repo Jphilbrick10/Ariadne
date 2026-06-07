@@ -1,0 +1,346 @@
+"""Initial Orbit Determination (IOD) -- a real, validated seed for orbit-fit differential correction.
+
+The linker's (r, rdot) hypothesis-search is the natural IOD here: under (r, rdot) each tracklet maps to
+a full heliocentric (x, v); propagate all to a common epoch; the (r, rdot) that makes them cluster
+tightest IS the best initial orbit. The cluster centroid (x, v) at the reference epoch is then a clean
+seed for LM differential correction.
+
+This avoids the classical Gauss-method failure modes (range root-finding, degenerate coplanar geometry,
+ambiguous solutions) by using the linker's own constrained geometry. Validated to recover real TNO
+orbits from their MPC astrometry within a few percent in (a, e, i).
+
+References:
+- Holman, Payne et al. 2018 (HelioLinC -- the (r, rdot) hypothesis is itself an IOD step).
+- Bate-Mueller-White, Fundamentals of Astrodynamics, Ch. 5 (orbit determination).
+"""
+
+from __future__ import annotations
+
+import math
+
+import numpy as np
+from scipy.optimize import least_squares
+
+from ..data.constants import AU_KM, GM_SUN
+from ..data.ephemeris import body_state
+from ..dynamics.secular import kepler_step
+from . import linkage as L
+
+
+def iod_diagnose(tracklets, *, r_grid_au=None, rdot_grid=None) -> dict:
+    """Trace exactly which guard rejects a tracklet set in iod_hypothesis_search.
+
+    Returns a dict with per-guard rejection counts::
+
+        n_tracklets: input length
+        n_hypotheses_tried: r_grid_au * rdot_grid
+        rejected_too_few_valid: hypotheses where fewer than 3 tracklets pass
+            the geometry transform
+        rejected_nan_propagation: hypotheses where kepler_step produced NaN
+            for all states
+        best_scatter_km: best basin found, if any
+        converged: true if at least one basin was finite
+    """
+    if len(tracklets) < 3:
+        return {
+            "n_tracklets": len(tracklets),
+            "rejection_reason": "below_min_3_tracklets",
+            "converged": False,
+        }
+    geom = L.precompute_geometry(tracklets)
+    if r_grid_au is None:
+        r_grid_au = np.concatenate(
+            [np.linspace(30, 80, 51), np.linspace(82, 200, 60), np.linspace(205, 400, 40)]
+        )
+    if rdot_grid is None:
+        rdot_grid = np.linspace(-1.5, 1.5, 31)
+    n_total = len(r_grid_au) * len(rdot_grid)
+    n_too_few_valid = 0
+    n_nan_prop = 0
+    n_converged = 0
+    best_scatter = np.inf
+    t_ref = float(np.median(geom.t))
+    for r_au in r_grid_au:
+        r_km = r_au * AU_KM
+        for rdot in rdot_grid:
+            x, v, valid = L.transform(geom, r_km, rdot)
+            if valid.sum() < 3:
+                n_too_few_valid += 1
+                continue
+            idx = np.where(valid)[0]
+            with np.errstate(all="ignore"):
+                xref, vref = kepler_step(x[idx], v[idx], GM_SUN, t_ref - geom.t[idx])
+            fin = np.all(np.isfinite(xref), axis=1) & np.all(np.isfinite(vref), axis=1)
+            if fin.sum() < 3:
+                n_nan_prop += 1
+                continue
+            n_converged += 1
+            xref = xref[fin]
+            x_med = np.median(xref, axis=0)
+            scatter = float(np.sum(np.linalg.norm(xref - x_med, axis=1) ** 2))
+            best_scatter = min(best_scatter, scatter)
+    return {
+        "n_tracklets": len(tracklets),
+        "n_hypotheses_tried": n_total,
+        "rejected_too_few_valid": n_too_few_valid,
+        "rejected_nan_propagation": n_nan_prop,
+        "n_converged_hypotheses": n_converged,
+        "best_scatter_km": (None if not np.isfinite(best_scatter) else best_scatter),
+        "converged": n_converged > 0,
+    }
+
+
+def iod_hypothesis_search(tracklets, t_ref=None, r_grid_au=None, rdot_grid=None, refine_iters=2):
+    """Re-derive the best (r_au, rdot) hypothesis on a candidate's own tracklets and return the
+    centroid heliocentric (x, v) at t_ref as the IOD seed.
+
+    Returns dict with x_init, v_init, t_ref, r_au, rdot, scatter_km, n_valid.
+    """
+    if len(tracklets) < 3:
+        return None
+    geom = L.precompute_geometry(tracklets)
+    if t_ref is None:
+        t_ref = float(np.median(geom.t))
+
+    if r_grid_au is None:
+        r_grid_au = np.concatenate(
+            [np.linspace(30, 80, 51), np.linspace(82, 200, 60), np.linspace(205, 400, 40)]
+        )
+    if rdot_grid is None:
+        rdot_grid = np.linspace(-1.5, 1.5, 31)  # km/s, step 0.1
+
+    best = {"scatter_km": np.inf}
+    for r_au in r_grid_au:
+        r_km = r_au * AU_KM
+        for rdot in rdot_grid:
+            x, v, valid = L.transform(geom, r_km, rdot)
+            if valid.sum() < 3:
+                continue
+            idx = np.where(valid)[0]
+            with np.errstate(all="ignore"):
+                xref, vref = kepler_step(x[idx], v[idx], GM_SUN, t_ref - geom.t[idx])
+            fin = np.all(np.isfinite(xref), axis=1) & np.all(np.isfinite(vref), axis=1)
+            if fin.sum() < 3:
+                continue
+            xref, vref = xref[fin], vref[fin]
+            # robust centroid via median (resistant to outlier tracklets)
+            x_med = np.median(xref, axis=0)
+            scatter = float(np.sum(np.linalg.norm(xref - x_med, axis=1) ** 2))
+            if scatter < best["scatter_km"]:
+                v_med = np.median(vref, axis=0)
+                best = {
+                    "x_init": x_med,
+                    "v_init": v_med,
+                    "t_ref": t_ref,
+                    "r_au": float(r_au),
+                    "rdot": float(rdot),
+                    "scatter_km": scatter,
+                    "n_valid": int(fin.sum()),
+                }
+
+    if not np.isfinite(best["scatter_km"]):
+        return None
+    # local refinement: zoom into the (r, rdot) basin
+    zooms = [(4.0, 0.20, 25, 21), (1.0, 0.05, 25, 21)]  # (Δr, Δrdot, n_r, n_rdot) per pass
+    for dr, drd, nr, nrd in zooms[:refine_iters]:
+        r0 = best["r_au"]
+        rd0 = best["rdot"]
+        r_grid = np.linspace(max(20, r0 - dr), r0 + dr, nr)
+        rd_grid = np.linspace(rd0 - drd, rd0 + drd, nrd)
+        for r_au in r_grid:
+            r_km = r_au * AU_KM
+            for rdot in rd_grid:
+                x, v, valid = L.transform(geom, r_km, rdot)
+                if valid.sum() < 3:
+                    continue
+                idx = np.where(valid)[0]
+                with np.errstate(all="ignore"):
+                    xref, vref = kepler_step(x[idx], v[idx], GM_SUN, t_ref - geom.t[idx])
+                fin = np.all(np.isfinite(xref), axis=1) & np.all(np.isfinite(vref), axis=1)
+                if fin.sum() < 3:
+                    continue
+                xref, vref = xref[fin], vref[fin]
+                x_med = np.median(xref, axis=0)
+                scatter = float(np.sum(np.linalg.norm(xref - x_med, axis=1) ** 2))
+                if scatter < best["scatter_km"]:
+                    v_med = np.median(vref, axis=0)
+                    best = {
+                        "x_init": x_med,
+                        "v_init": v_med,
+                        "t_ref": t_ref,
+                        "r_au": float(r_au),
+                        "rdot": float(rdot),
+                        "scatter_km": scatter,
+                        "n_valid": int(fin.sum()),
+                    }
+    return best
+
+
+def _predict_radec(state, t_ref, t, R_obs):
+    r, v = state[:3], state[3:]
+    with np.errstate(all="ignore"):
+        rt, _ = kepler_step(r, v, GM_SUN, t - t_ref)
+    g = rt - R_obs
+    rn = float(np.linalg.norm(g))
+    if rn < 1e3 or not np.isfinite(rn):
+        return float("nan"), float("nan")
+    return math.atan2(g[1], g[0]), math.asin(g[2] / rn)
+
+
+def _light_time_correct_observer(t, R_obs, target_pos_helio):
+    """Iterate light-time: the photon we observe at t left the target at t - rho/c.
+
+    For TNOs this is 5-15 hours -- a few arcsec systematic if ignored. Two iterations is enough.
+    """
+    C_KM_S = 299792.458
+    rho = float(np.linalg.norm(target_pos_helio - R_obs))
+    for _ in range(2):
+        tau = rho / C_KM_S
+        R_at_emit = body_state("EARTH", t - tau, "J2000", "SUN")[:3]
+        rho = float(np.linalg.norm(target_pos_helio - R_at_emit))
+    return tau, R_at_emit
+
+
+def fit_orbit_lm(tracklet_records, t_ref, x_init, v_init, light_time=True, max_nfev=2000):
+    """LM differential correction from an IOD seed. Returns dict with x_fit, v_fit, rms_arcsec, nfev.
+
+    Uses scipy LM (linear loss, full residuals -- not soft_l1; we want LM to drive residuals all the
+    way to ~arcsec). State is internally rescaled so position-component (km, ~1e10) and velocity-
+    component (km/s, ~few) have comparable scale to the optimiser's step-size logic. With light-time
+    correction (~ few arcsec systematic if omitted).
+    """
+    ts = np.array([t["t"] for t in tracklet_records])
+    ras = np.array([t["ra"] for t in tracklet_records])
+    decs = np.array([t["dec"] for t in tracklet_records])
+
+    Ro_t = np.array([body_state("EARTH", float(t), "J2000", "SUN")[:3] for t in ts])
+    # state rescale: pos in AU, vel in km/s -- comparable magnitudes for LM step heuristics
+    POS_SCALE = AU_KM
+
+    def residuals(state_scaled):
+        out = np.empty(2 * len(ts))
+        r = state_scaled[:3] * POS_SCALE  # back to km
+        v = state_scaled[3:]
+        for k in range(len(ts)):
+            with np.errstate(all="ignore"):
+                rt, _ = kepler_step(r, v, GM_SUN, float(ts[k]) - t_ref)
+            if not np.all(np.isfinite(rt)):
+                out[2 * k] = 1e-3
+                out[2 * k + 1] = 1e-3  # ~200 arcsec, large but non-pathological
+                continue
+            if light_time:
+                rho = float(np.linalg.norm(rt - Ro_t[k]))
+                if not np.isfinite(rho) or rho < 1e3:
+                    out[2 * k] = 1e-3
+                    out[2 * k + 1] = 1e-3
+                    continue
+                tau = rho / 299792.458
+                R_em = body_state("EARTH", float(ts[k]) - tau, "J2000", "SUN")[:3]
+                g = rt - R_em
+            else:
+                g = rt - Ro_t[k]
+            rn = float(np.linalg.norm(g))
+            if not np.isfinite(rn) or rn < 1e3:
+                out[2 * k] = 1e-3
+                out[2 * k + 1] = 1e-3
+                continue
+            ra_p = math.atan2(g[1], g[0])
+            dec_p = math.asin(max(-1.0, min(1.0, g[2] / rn)))
+            dra = (ra_p - ras[k] + math.pi) % (2 * math.pi) - math.pi
+            ddec = dec_p - decs[k]
+            out[2 * k] = dra * math.cos(decs[k])
+            out[2 * k + 1] = ddec
+        return out
+
+    x0 = np.concatenate([np.asarray(x_init) / POS_SCALE, np.asarray(v_init)])
+    try:
+        r = least_squares(residuals, x0, method="lm", xtol=1e-14, ftol=1e-14, max_nfev=max_nfev)
+        rms_rad = math.sqrt((r.fun**2).mean())
+        x_fit_km = r.x[:3] * POS_SCALE
+        v_fit = r.x[3:]
+        return {
+            "x_fit": x_fit_km,
+            "v_fit": v_fit,
+            "rms_arcsec": float(rms_rad * 206265),
+            "nfev": int(r.nfev),
+            "success": bool(r.success),
+        }
+    except Exception as e:
+        return {
+            "x_fit": x_init,
+            "v_fit": v_init,
+            "rms_arcsec": float("inf"),
+            "nfev": 0,
+            "success": False,
+            "err": str(e)[:120],
+        }
+
+
+def fit_candidate(
+    tracklet_records, t_ref=None, *, use_nbody_auto: bool = True, nbody_arc_days: float = 365.0
+):
+    """One-shot: IOD + LM. Returns full fit dict or None on geometric/IOD failure.
+
+    Long arcs are automatically promoted to the N-body LM fitter after the
+    2-body fit finds the basin. If N-body refinement fails, the returned fit is
+    explicitly marked as a 2-body fallback rather than silently presented as
+    high-fidelity.
+    """
+    if t_ref is None:
+        t_ref = float(np.median([t["t"] for t in tracklet_records]))
+    seed = iod_hypothesis_search(tracklet_records, t_ref=t_ref)
+    if seed is None:
+        return None
+    fit = fit_orbit_lm(tracklet_records, t_ref, seed["x_init"], seed["v_init"])
+    ts = [float(t["t"]) for t in tracklet_records]
+    arc_days = (max(ts) - min(ts)) / 86400.0 if ts else 0.0
+    fit["dynamics_model"] = "2body_kepler_lm"
+    fit["arc_days"] = float(arc_days)
+    if use_nbody_auto and arc_days >= nbody_arc_days and fit.get("success"):
+        try:
+            from .orbit_fit_nbody import fit_orbit_nbody
+
+            nfit = fit_orbit_nbody(tracklet_records, t_ref, fit["x_fit"], fit["v_fit"])
+            # Accept the N-body result ONLY if it is a genuine refinement: success,
+            # finite, and not materially WORSE than the 2-body fit. A "refinement" that
+            # blows the RMS up (e.g. a propagator failure flooding the sentinel residual)
+            # must never silently overwrite a good 2-body fit -- keep the 2-body fallback.
+            nbody_rms = nfit.get("rms_arcsec", np.inf)
+            two_body_rms = fit["rms_arcsec"]
+            if (
+                nfit.get("success")
+                and np.isfinite(nbody_rms)
+                and nbody_rms <= max(two_body_rms * 1.25, two_body_rms + 0.5)
+            ):
+                nfit["rms_2body_arcsec"] = two_body_rms
+                nfit["dynamics_model"] = "nbody_lm"
+                nfit["arc_days"] = float(arc_days)
+                fit = nfit
+            else:
+                fit["nbody_promotion_status"] = "failed"
+                if np.isfinite(nbody_rms) and nbody_rms > max(
+                    two_body_rms * 1.25, two_body_rms + 0.5
+                ):
+                    fit["nbody_promotion_error"] = (
+                        f'nbody RMS {nbody_rms:.2f}" worse than 2-body {two_body_rms:.2f}" '
+                        f"-- kept 2-body fit"
+                    )
+                else:
+                    fit["nbody_promotion_error"] = nfit.get(
+                        "err", "nbody refinement did not converge"
+                    )
+        except Exception as exc:
+            fit["nbody_promotion_status"] = "failed"
+            fit["nbody_promotion_error"] = str(exc)[:160]
+    elif use_nbody_auto:
+        fit["nbody_promotion_status"] = "not_required_short_arc"
+    else:
+        fit["nbody_promotion_status"] = "disabled"
+    fit["t_ref"] = t_ref
+    fit["iod"] = {
+        "r_au": seed["r_au"],
+        "rdot": seed["rdot"],
+        "scatter_km": seed["scatter_km"],
+        "n_valid": seed["n_valid"],
+    }
+    return fit

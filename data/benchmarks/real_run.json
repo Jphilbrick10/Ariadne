@@ -1,0 +1,85 @@
+{
+  "inference": {
+    "n_cases": 14,
+    "elapsed_s": 0.060362815856933594,
+    "accuracy": 0.9285714285714286,
+    "macro_precision": 0.6818181818181818,
+    "macro_recall": 0.7272727272727273,
+    "macro_f1": 0.696969696969697,
+    "nll": 0.9251283086078029,
+    "brier": 0.3300230388090792,
+    "ece": 0.2905966063831035,
+    "source_counts": {
+      "real_mpc_known_object_proxy": 3,
+      "ztf_like_synthetic": 2,
+      "lsst_like_synthetic": 2,
+      "adversarial_false_positive": 5,
+      "blind_holdout": 2
+    },
+    "split_counts": {
+      "validation": 12,
+      "blind": 2
+    },
+    "certificate_hash": "3e969506a0e7fba99d6e6507eb097a537259081b1257d7e5e9919b6e6f64654d",
+    "calibration_temperature": 0.75,
+    "fitted_calibration": {
+      "global_T": 0.75,
+      "class_T_count": 0,
+      "class_T": {},
+      "version": "global-only-0.75",
+      "post_fit_nll": 4.740255852510766,
+      "post_fit_brier": 0.4257340332646392,
+      "post_fit_ece": 0.24462240901330734,
+      "nll_improvement": -3.8151275439029635,
+      "ece_improvement": 0.04597419736979613
+    }
+  },
+  "sensitivity": {
+    "n_injected": 30,
+    "n_recovered": 30,
+    "n_false_positives": 0,
+    "recovery_rate": 1.0,
+    "median_rms_arcsec": 0.11553193747420329,
+    "median_arc_days": 3.1666666666642413,
+    "by_magnitude": {
+      "18-19": {
+        "n_injected": 3,
+        "n_recovered": 3,
+        "rate": 1.0
+      },
+      "19-20": {
+        "n_injected": 7,
+        "n_recovered": 7,
+        "rate": 1.0
+      },
+      "20-21": {
+        "n_injected": 11,
+        "n_recovered": 11,
+        "rate": 1.0
+      },
+      "21-22": {
+        "n_injected": 6,
+        "n_recovered": 6,
+        "rate": 1.0
+      },
+      "22-22.5": {
+        "n_injected": 1,
+        "n_recovered": 1,
+        "rate": 1.0
+      },
+      "22.5-23.0": {
+        "n_injected": 2,
+        "n_recovered": 2,
+        "rate": 1.0
+      }
+    },
+    "by_rate": {
+      "3.0-10.0": {
+        "n_injected": 30,
+        "n_recovered": 30,
+        "rate": 1.0
+      }
+    },
+    "elapsed_s": 1569.8121192455292
+  }
+}

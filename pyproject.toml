@@ -1,0 +1,107 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ariadne-astro"
+version = "1.0.0rc2"
+description = "Python-native cislunar mission design + TNO discovery toolkit (CR3BP, manifolds, NRHO, HelioLinC, Coherence-HJB)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "LicenseRef-PolyForm-Noncommercial-1.0.0"
+license-files = ["LICENSE"]
+authors = [{ name = "Ariadne project contributors" }]
+keywords = [
+    "astrodynamics", "CR3BP", "cislunar", "Gateway", "NRHO",
+    "trajectory-optimization", "low-energy-transfer", "invariant-manifolds",
+    "heteroclinic", "interplanetary", "gravity-assist", "VEEGA",
+    "Lambert", "porkchop", "Hamilton-Jacobi-Bellman", "Helmholtz",
+    "discovery", "HelioLinC", "TNO", "ephemeris", "DE440", "SPICE", "GMAT",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Education",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Astronomy",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "numpy>=2.0",
+    "scipy>=1.13",
+    "matplotlib>=3.8",
+    "spiceypy>=6.0",
+    "h5py>=3.10",
+    "astroquery>=0.4",                # for MPC + SkyBoT in the discovery pipeline
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "pytest-xdist>=3.5", "ruff>=0.15"]
+docs = [
+    "sphinx>=7.0",
+    "furo>=2024.0",
+    "myst-parser>=2.0",
+    "sphinx-copybutton>=0.5",
+]
+crosscheck = ["jplephem>=2.21", "rebound>=4.0"]
+autodiff = ["jax>=0.4", "jaxlib>=0.4"]      # autodiff trajectory optimization (Stage 41)
+gpu = ["numba>=0.59"]                       # numba.cuda accelerated rollouts
+notebooks = ["jupyter>=1.0", "ipykernel>=6.0", "ipywidgets>=8.0"]
+
+[project.urls]
+Homepage = "https://github.com/Jphilbrick10/Ariadne"
+"Master plan" = "https://github.com/Jphilbrick10/Ariadne/blob/master/MASTER_PLAN.md"
+"White paper" = "https://github.com/Jphilbrick10/Ariadne/blob/master/docs/WHITE_PAPER.md"
+
+[project.scripts]
+ariadne = "ariadne.cli:main"
+ariadne-atlas = "ariadne.atlas.release:main"
+ariadne-figures = "ariadne.viz.figures:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+ariadne = ["py.typed"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+    "E",     # pycodestyle errors
+    "F",     # pyflakes (undefined names, unused imports)
+    "I",     # isort (import order)
+    "B",     # flake8-bugbear (likely bugs)
+    "UP",    # pyupgrade (modernise syntax)
+    "SIM",   # flake8-simplify
+    "RUF",   # ruff-specific
+]
+ignore = [
+    "E501",   # line too long -- handled by formatter where it matters
+    "E731",   # lambda assignment -- common in numerical code
+    "B008",   # function calls in argument defaults -- intentional for cache
+    "B028",   # warnings.warn without stacklevel -- noise
+]
+unfixable = [
+    "F401",  # don't auto-remove unused imports (we re-export them in __init__.py)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"examples/*.py" = ["E402", "F401"]
+"benchmarks/*.py" = ["E402"]
+"tests/*.py" = ["E402", "F401"]
+"src/ariadne/__init__.py" = ["F401"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "network: marks tests that need network access (MPC, JPL, SkyBoT)",
+]
