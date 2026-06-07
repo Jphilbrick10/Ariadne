@@ -11,6 +11,7 @@ For a claim-by-claim evidence map, see [`REVIEWER_GUIDE.md`](REVIEWER_GUIDE.md).
 
 | Gate | Command | Result |
 |---|---|---|
+| One-command reviewer quickcheck | `python scripts\reviewer_quickcheck.py --report results\reviewer_quickcheck_report.json` | passed; lint, fast tests, Sphinx docs, closure ledger |
 | Fast offline test suite | `pytest -m "not slow" -q` | 1048 passed, 5 skipped, 30 deselected |
 | Production lint sanity | `ruff check src\ariadne --select E9,F63,F7,F82,B023,B904` | passed |
 | Closure proof ledger | `python scripts/build_closure_report.py --fail-on-critical` | status complete, readiness 1.000000, critical failures 0 |

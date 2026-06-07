@@ -12,6 +12,14 @@ From a fresh checkout:
 ```bash
 python -m pip install --upgrade pip
 pip install -e ".[dev,docs]"
+PYTHONPATH=src python scripts/reviewer_quickcheck.py
+```
+
+The script writes `results/reviewer_quickcheck_report.json` with per-gate
+commands, status, durations, and output tails. The equivalent manual commands
+are:
+
+```bash
 ruff check src/ariadne --select E9,F63,F7,F82,B023,B904
 pytest -m "not slow" -q
 sphinx-build -b html -W --keep-going docs/sphinx docs/sphinx/_build/html
@@ -59,6 +67,7 @@ Recommended focused commands:
 ```bash
 pytest tests/test_integrators.py tests/test_packaging.py -q
 pytest tests/test_external_corpora.py tests/test_discovery_complete.py -q
+PYTHONPATH=src python scripts/reviewer_quickcheck.py --profile smoke
 PYTHONPATH=src python -m ariadne.validate.stage24
 PYTHONPATH=src python -m ariadne.validate.stage32
 ```

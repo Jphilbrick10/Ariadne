@@ -190,9 +190,7 @@ def main():
     print(f"\n=== PIXEL-TRUTH for {N} predicted knowns ({len(ccds)} CCDs) ===")
     for k, v in cats.items():
         print(f"  {k:<10}: {v:4d}  ({v / max(N, 1) * 100:4.0f}%)")
-    print(
-        '\n  on clean chip, by phase-CORRECTED mag:  flux-present  vs  pipeline-extracted(<2.5")'
-    )
+    print('\n  on clean chip, by phase-CORRECTED mag:  flux-present  vs  pipeline-extracted(<2.5")')
     for b in magbins:
         cl = perbin[b]["clean"]
         fl = perbin[b]["flux"]

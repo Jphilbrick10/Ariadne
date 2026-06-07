@@ -34,6 +34,9 @@ jobs:
       - name: Production lint sanity
         run: ruff check src/ariadne --select E9,F63,F7,F82,B023,B904
 
+      - name: Reviewer quickcheck dry run
+        run: python scripts/reviewer_quickcheck.py --profile smoke --dry-run
+
       - name: Format check (ruff format)
         run: ruff format --check src/ariadne tests scripts benchmarks
 
