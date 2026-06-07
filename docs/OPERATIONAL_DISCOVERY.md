@@ -54,8 +54,21 @@ For alert replay:
 $env:PYTHONPATH="src"
 python scripts\acquire_real_labelled_corpus.py `
   --out-dir data\benchmarks\real_corpus_alerce_probe `
-  --alerce --ra 180 --dec 0 --radius-deg 2 `
-  --mjd-start 60000 --mjd-end 60400 --max-alerts 100 `
+  --alerce --alerce-class asteroid --alerce-classifier stamp_classifier `
+  --ra 77.5 --dec 18.0 --radius-deg 18 `
+  --mjd-start 58000 --mjd-end 61200 --max-alerts 50 `
+  --run-replay
+```
+
+The public release includes one frozen ALeRCE/ZTF asteroid-class replay corpus:
+
+```powershell
+$env:PYTHONPATH="src"
+python scripts\acquire_real_labelled_corpus.py `
+  --out-dir data\benchmarks\real_corpus_alerce_ztf_asteroid_2026 `
+  --alerce --alerce-class asteroid --alerce-classifier stamp_classifier `
+  --ra 77.5 --dec 18.0 --radius-deg 18 `
+  --mjd-start 58000 --mjd-end 61200 --max-alerts 50 `
   --run-replay
 ```
 

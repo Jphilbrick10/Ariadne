@@ -1,7 +1,7 @@
 {
-  "certificate_hash": "71a3ecdadcb55b09bb04459965e10b386f9b6dd74d41d15b601908baaa3a04a9",
-  "created_utc": "2026-06-07T02:42:43.543949+00:00",
-  "file_count": 17,
+  "certificate_hash": "061a00885093742bd47734c6d8c58ad3d8093c5551b9e8c30a451b5031edd501",
+  "created_utc": "2026-06-07T03:17:40.056769+00:00",
+  "file_count": 21,
   "files": [
     {
       "bytes": 13754,
@@ -12,20 +12,20 @@
       "sha256": "c3ebe3c53312736c8a4d8bda99d3a5b3a59deb4a9ea994f0ad3f065a19939e19"
     },
     {
-      "bytes": 6418,
+      "bytes": 6862,
       "claim": "Claim-to-evidence review path.",
-      "line_count": 121,
+      "line_count": 124,
       "path": "docs/REVIEWER_GUIDE.md",
       "role": "review_map",
-      "sha256": "eaadf1dab5b4a3dee0e4e3562d7ee360c4f3d1a9ebb82b397b345a7e611dceb0"
+      "sha256": "a218459113eef11ffdda58d7f524e813882cc7cd9990c8915dbdba56c1247363"
     },
     {
-      "bytes": 3858,
+      "bytes": 4097,
       "claim": "Commands run for public launch.",
-      "line_count": 70,
+      "line_count": 74,
       "path": "docs/PUBLIC_LAUNCH_AUDIT.md",
       "role": "release_audit",
-      "sha256": "2f6aa14c116dab735ec3d3985d4e8b7fc60bbc233e5d8717b9462cc9b698daa3"
+      "sha256": "35d223d7b08176426b974d3c504046cbe44d359cdd91b59e9c21cb50f3592261"
     },
     {
       "bytes": 13621,
@@ -44,12 +44,12 @@
       "sha256": "654f8bb1fc7bb5ead33474fe8b12db18160727950d776d41503dc3937300d652"
     },
     {
-      "bytes": 1484,
+      "bytes": 2886,
       "claim": "Real-data benchmark summary.",
-      "line_count": 54,
+      "line_count": 87,
       "path": "docs/REAL_BENCHMARKS.md",
       "role": "real_data_report",
-      "sha256": "4e75ae336707d53198dd6f8370c7d9c41dab5143190d4833b71e33f52096ee36"
+      "sha256": "310a34eb7b4c4e3db2cd09feaea7f676260a180c6955da755ff968eedee3a009"
     },
     {
       "bytes": 17038,
@@ -57,7 +57,7 @@
       "line_count": 575,
       "path": "data/benchmarks/closure/closure_report.json",
       "role": "closure_ledger",
-      "sha256": "5dc01b9e5901ef1415c0f918c231f066eba86e2c695dd7e4e76670e618df7820",
+      "sha256": "52b637fbce22fc5161489aec49c36923c22516607c366b698e1ca664593434d5",
       "summary": {
         "certificate_hash": "4a65a794e70cdf3d42025890a1257ee2e28b1d9b96a71edf434f3361ee52375e",
         "critical_failures": 0,
@@ -82,7 +82,9 @@
       "role": "frozen_labelled_corpus_manifest",
       "sha256": "c7076711bb43d708f012d03bee2d72593279bd9f89c36385c96791ae67c29803",
       "summary": {
+        "alert_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
         "case_hash": "220af135ce69a710684df8cee967b4bb8484c7beca5473bdc6447edec95856f0",
+        "n_alerts": 0,
         "n_cases": 500,
         "schema": "ariadne.discovery.real_corpus_manifest.v1"
       }
@@ -116,6 +118,49 @@
       "path": "data/benchmarks/real_corpus_mpc_500/benchmark/reliability_curve.csv",
       "role": "real_corpus_reliability",
       "sha256": "925e913a8598741d555eb8864e60969872590ca90c3d3f6f3c3e8414f2a1c33b"
+    },
+    {
+      "bytes": 1773,
+      "claim": "Frozen public ALeRCE/ZTF asteroid-class alert replay corpus manifest.",
+      "line_count": 50,
+      "path": "data/benchmarks/real_corpus_alerce_ztf_asteroid_2026/corpus_manifest.json",
+      "role": "external_ztf_alert_corpus_manifest",
+      "sha256": "2034e950ad8190324009fc9e7f6da8679caeb6a6211499c9e10b0f87f8de61e0",
+      "summary": {
+        "alert_hash": "f7a68fe855eb1d600448330aba863867c583f19d92febfc14af82a9c9d09bbe7",
+        "case_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "n_alerts": 998,
+        "n_cases": 0,
+        "schema": "ariadne.discovery.real_corpus_manifest.v1"
+      }
+    },
+    {
+      "bytes": 247577,
+      "claim": "Frozen public ALeRCE/ZTF asteroid-class alert detections.",
+      "line_count": 998,
+      "path": "data/benchmarks/real_corpus_alerce_ztf_asteroid_2026/alerts.jsonl",
+      "role": "external_ztf_alerts",
+      "sha256": "453af4622f357167315b03f40e55a1da1aa3d74734aebd181c284a86ca21bbd7"
+    },
+    {
+      "bytes": 425,
+      "claim": "Replay summary for the frozen public ALeRCE/ZTF alert corpus.",
+      "line_count": 12,
+      "path": "data/benchmarks/real_corpus_alerce_ztf_asteroid_2026/replay_manifest.json",
+      "role": "external_ztf_replay_manifest",
+      "sha256": "84518aa922f80814a20e002fdbc61b01f5f63154f0b113e9742619d5f11cdd2f",
+      "summary": {
+        "n_alerts": 998,
+        "schema": "ariadne.discovery.replay_manifest.v1"
+      }
+    },
+    {
+      "bytes": 170401,
+      "claim": "Per-batch replay provenance for the public ALeRCE/ZTF alert corpus.",
+      "line_count": 456,
+      "path": "data/benchmarks/real_corpus_alerce_ztf_asteroid_2026/provenance.jsonl",
+      "role": "external_ztf_replay_provenance",
+      "sha256": "98a275edde8f01855ad8aa677fa827aad55031936a948adefee7958632056ef3"
     },
     {
       "bytes": 753918,
@@ -177,6 +222,7 @@
   "limits": [
     "Source-available under PolyForm Noncommercial, not OSI open-source.",
     "Frozen MPC corpus is useful evidence, not a blind NOIRLab/ZTF/LSST competition.",
+    "Frozen ALeRCE/ZTF corpus is a public broker-classified alert replay corpus, not a ground-truth labelled LSST/NOIRLab benchmark.",
     "Network-backed external benchmarks should be rerun before new scientific claims.",
     "Operational mission design still requires certified workflows such as GMAT/Monte/Copernicus."
   ],

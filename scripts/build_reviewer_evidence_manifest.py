@@ -67,6 +67,26 @@ EVIDENCE_FILES = [
         "Reliability curve for calibration review.",
     ),
     EvidenceFile(
+        "data/benchmarks/real_corpus_alerce_ztf_asteroid_2026/corpus_manifest.json",
+        "external_ztf_alert_corpus_manifest",
+        "Frozen public ALeRCE/ZTF asteroid-class alert replay corpus manifest.",
+    ),
+    EvidenceFile(
+        "data/benchmarks/real_corpus_alerce_ztf_asteroid_2026/alerts.jsonl",
+        "external_ztf_alerts",
+        "Frozen public ALeRCE/ZTF asteroid-class alert detections.",
+    ),
+    EvidenceFile(
+        "data/benchmarks/real_corpus_alerce_ztf_asteroid_2026/replay_manifest.json",
+        "external_ztf_replay_manifest",
+        "Replay summary for the frozen public ALeRCE/ZTF alert corpus.",
+    ),
+    EvidenceFile(
+        "data/benchmarks/real_corpus_alerce_ztf_asteroid_2026/provenance.jsonl",
+        "external_ztf_replay_provenance",
+        "Per-batch replay provenance for the public ALeRCE/ZTF alert corpus.",
+    ),
+    EvidenceFile(
         "data/benchmarks/external_inference/metrics.json",
         "external_inference_metrics",
         "External inference benchmark metrics.",
@@ -138,6 +158,8 @@ def json_summary(path: Path) -> dict:
         "certificate_hash",
         "n_cases",
         "case_hash",
+        "n_alerts",
+        "alert_hash",
         "accuracy",
         "macro_f1",
         "safe_accuracy",
@@ -188,6 +210,7 @@ def build_manifest() -> dict:
         "limits": [
             "Source-available under PolyForm Noncommercial, not OSI open-source.",
             "Frozen MPC corpus is useful evidence, not a blind NOIRLab/ZTF/LSST competition.",
+            "Frozen ALeRCE/ZTF corpus is a public broker-classified alert replay corpus, not a ground-truth labelled LSST/NOIRLab benchmark.",
             "Network-backed external benchmarks should be rerun before new scientific claims.",
             "Operational mission design still requires certified workflows such as GMAT/Monte/Copernicus.",
         ],

@@ -21,6 +21,39 @@ from the built-in corpus. Elapsed: 0.1s.
 
 Source counts: `{'real_mpc_known_object_proxy': 3, 'ztf_like_synthetic': 2, 'lsst_like_synthetic': 2, 'adversarial_false_positive': 5, 'blind_holdout': 2}`
 
+## Frozen public ZTF/ALeRCE alert corpus
+
+`data/benchmarks/real_corpus_alerce_ztf_asteroid_2026/` freezes a live public
+ALeRCE/ZTF asteroid-class alert acquisition. It is external survey-broker data,
+not a synthetic fixture and not an official LSST/NOIRLab labelled benchmark.
+
+| Field | Value |
+|---|---|
+| Source | Public ALeRCE API over ZTF alerts |
+| Broker classifier | `stamp_classifier` |
+| Broker class | `asteroid` |
+| Search cone | RA `77.5 deg`, Dec `18.0 deg`, radius `18 deg` |
+| MJD window | `58000` to `61200` |
+| Frozen alerts | `998` |
+| Replay batches | `454` |
+| Replay outputs | `0` |
+| Alert hash | `f7a68fe855eb1d600448330aba863867c583f19d92febfc14af82a9c9d09bbe7` |
+| Replay output hash | `4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945` |
+
+Artifacts:
+
+- `corpus_manifest.json`: acquisition parameters, source references, alert hash,
+  and replay summary.
+- `alerts.jsonl`: frozen alert detections.
+- `replay_manifest.json`: deterministic replay summary.
+- `provenance.jsonl`: per-batch replay provenance.
+
+Interpretation: this corpus demonstrates that Ariadne can acquire, freeze, hash,
+and replay live public ZTF broker alerts through its operational discovery path.
+Because the labels are broker classifier outputs rather than independent
+ground-truth labels, this should be treated as external replay/provenance
+evidence, not as an inference accuracy benchmark.
+
 ## Sensitivity recovery
 
 Injected **30 synthetic moving objects**

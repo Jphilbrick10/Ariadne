@@ -58,7 +58,7 @@ def _query_alerce(args, records: list[CorpusBuildRecord]):
     try:
         from ariadne.discovery.brokers.alerce import AlerceZTFBroker
 
-        broker = AlerceZTFBroker(class_name=args.alerce_class)
+        broker = AlerceZTFBroker(class_name=args.alerce_class, classifier=args.alerce_classifier)
         alerts = list(
             broker.query_cone(
                 args.ra,
@@ -74,6 +74,7 @@ def _query_alerce(args, records: list[CorpusBuildRecord]):
                 source="alerce_ztf",
                 path_or_url="https://api.alerce.online/",
                 n_alerts=len(alerts),
+                n_records=1,
             )
         )
         return alerts
@@ -84,6 +85,7 @@ def _query_alerce(args, records: list[CorpusBuildRecord]):
                 path_or_url="https://api.alerce.online/",
                 status="error",
                 error=f"{type(exc).__name__}: {exc}",
+                n_records=1,
             )
         )
         return []
@@ -222,6 +224,16 @@ def build_corpus(args) -> dict:
         "schema": "ariadne.discovery.real_corpus_manifest.v1",
         "created_utc": datetime.now(timezone.utc).isoformat(),
         "source_references": _jsonable(ExternalCorpusManifest()),
+        "acquisition": {
+            "alerce_class": args.alerce_class if args.alerce else "",
+            "alerce_classifier": args.alerce_classifier if args.alerce else "",
+            "ra": args.ra if args.alerce else None,
+            "dec": args.dec if args.alerce else None,
+            "radius_deg": args.radius_deg if args.alerce else None,
+            "mjd_start": args.mjd_start if args.alerce else None,
+            "mjd_end": args.mjd_end if args.alerce else None,
+            "max_alerts": args.max_alerts if args.alerce else None,
+        },
         "records": _jsonable(records),
         "n_cases": len(cases),
         "n_alerts": len(alerts),
@@ -253,6 +265,7 @@ def parse_args(argv=None):
     p.add_argument("--allow-unlabelled", action="store_true")
     p.add_argument("--alerce", action="store_true")
     p.add_argument("--alerce-class", default="asteroid")
+    p.add_argument("--alerce-classifier", default="stamp_classifier")
     p.add_argument("--ra", type=float, default=180.0)
     p.add_argument("--dec", type=float, default=0.0)
     p.add_argument("--radius-deg", type=float, default=1.0)

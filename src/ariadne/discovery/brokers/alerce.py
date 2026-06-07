@@ -27,18 +27,25 @@ class AlerceZTFBroker(BrokerBase):
 
     name = "ALeRCE-ZTF"
 
-    def __init__(self, class_name: str | None = "asteroid"):
+    def __init__(
+        self,
+        class_name: str | None = "asteroid",
+        classifier: str | None = "stamp_classifier",
+    ):
         try:
             from alerce.core import Alerce
         except ImportError as e:
             raise BrokerError("alerce client not installed -- `pip install alerce`") from e
         self._client = Alerce()
         self.class_name = class_name
+        self.classifier = classifier
 
     def _query_objects(
         self, ra=None, dec=None, radius=None, firstmjd=None, lastmjd=None, page_size=2000
     ):
         kwargs = dict(page_size=page_size, count=False, format="pandas")
+        if self.classifier:
+            kwargs["classifier"] = self.classifier
         if self.class_name:
             kwargs["class_name"] = self.class_name
         if ra is not None and dec is not None and radius is not None:

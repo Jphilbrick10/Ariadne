@@ -389,6 +389,7 @@ class TestALeRCEMocked:
             importlib.reload(ab)
             b = ab.AlerceZTFBroker(class_name="asteroid")
             assert b.class_name == "asteroid"
+            assert b.classifier == "stamp_classifier"
         finally:
             self._restore(saved)
             import importlib
@@ -411,6 +412,15 @@ class TestALeRCEMocked:
             b = ab.AlerceZTFBroker(class_name=None)
             with pytest.raises(BrokerError):
                 b._query_objects(ra=100, dec=20, radius=10)
+            client.query_objects.assert_called_with(
+                page_size=2000,
+                count=False,
+                format="pandas",
+                classifier="stamp_classifier",
+                ra=100,
+                dec=20,
+                radius=10,
+            )
         finally:
             self._restore(saved)
             import importlib

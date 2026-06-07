@@ -12,7 +12,7 @@ For a claim-by-claim evidence map, see [`REVIEWER_GUIDE.md`](REVIEWER_GUIDE.md).
 | Gate | Command | Result |
 |---|---|---|
 | One-command reviewer quickcheck | `python scripts\reviewer_quickcheck.py --report results\reviewer_quickcheck_report.json` | passed; lint, fast tests, Sphinx docs, closure ledger |
-| Frozen reviewer evidence manifest | `python scripts\build_reviewer_evidence_manifest.py` | complete; 17 hashed evidence files |
+| Frozen reviewer evidence manifest | `python scripts\build_reviewer_evidence_manifest.py` | complete; 21 hashed evidence files |
 | Fast offline test suite | `pytest -m "not slow" -q` | 1050 passed, 5 skipped, 30 deselected |
 | Production lint sanity | `ruff check src\ariadne --select E9,F63,F7,F82,B023,B904` | passed |
 | Closure proof ledger | `python scripts/build_closure_report.py --fail-on-critical` | status complete, readiness 1.000000, critical failures 0 |
@@ -46,6 +46,7 @@ The strongest public claims are backed by tracked artifacts in:
 - `data/benchmarks/engine_improvement/`
 - `data/benchmarks/external_inference/`
 - `data/benchmarks/real_decam_discovery/`
+- `data/benchmarks/real_corpus_alerce_ztf_asteroid_2026/`
 - `docs/VALIDATION_RESULTS.md`
 - `docs/COHERENCE_REAL_DATA_SCORECARD.md`
 
@@ -57,6 +58,9 @@ The strongest public claims are backed by tracked artifacts in:
 - Network-backed benchmarks depend on live third-party services and catalog
   versions. Treat stored benchmark artifacts as dated evidence, and rerun the
   acquisition scripts when making new scientific claims.
+- The frozen ALeRCE/ZTF alert corpus is a public broker-classified replay
+  corpus. It improves external-data provenance, but it is not a private
+  NOIRLab/LSST labelled benchmark.
 - Commercial use is not open-source licensed; the project is source-available
   under PolyForm Noncommercial plus a separate commercial license path.
 

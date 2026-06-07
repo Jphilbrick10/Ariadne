@@ -55,6 +55,7 @@ A notebook walk-through is available at
 | CR3BP/Lagrange/orbit-family machinery is numerically stable | `src/ariadne/validate/stage*.py`, tests, docs tables | `pytest -m "not slow" -q`; targeted stage scripts under `src/ariadne/validate/` | Does not replace full mission-ops tools |
 | Dynamics are cross-checked against external references | `docs/WHITE_PAPER.md`, `docs/VALIDATION_RESULTS.md`, `data/benchmarks/closure/` | Review validation docs and rerun stage scripts with required optional tools/data | GMAT availability and external tool versions can change |
 | Discovery pipeline can recover known TNO-style cases | `examples/04_tno_orbit_fit.py`, discovery tests, `data/benchmarks/real_corpus_mpc_500/` | `ariadne discover 90377`; discovery-focused pytest slices | Does not establish new-object discovery from a blind live survey |
+| Public ZTF broker alerts can be frozen and replayed | `data/benchmarks/real_corpus_alerce_ztf_asteroid_2026/` | Inspect `corpus_manifest.json`, `alerts.jsonl`, `replay_manifest.json`, and `provenance.jsonl` | Broker class is ALeRCE classifier output, not independent ground-truth labels |
 | Inference benchmarks include adversarial and calibration checks | `data/benchmarks/external_inference/`, `data/benchmarks/inference_adversarial_builtin/` | Inspect metrics, reliability outputs, and benchmark scripts | Built-in CI proxies are not a substitute for a large labelled alert stream |
 | Real-data discovery results are reported honestly | `docs/VALIDATION_RESULTS.md`, `docs/REAL_BENCHMARKS.md`, `docs/FRONTIER_FINDINGS.md` | Compare stored benchmark artifacts to the documented null findings | Null results do not prove no objects exist in deeper or unqueried surveys |
 | Solar/interplanetary navigation tools are exploratory research engines | `docs/SOLAR_SYSTEM_NAVIGATOR.md`, `data/benchmarks/solar_navigator_benchmark/`, `src/ariadne/interplanetary/` | Run examples and benchmark scripts for specific scenarios | Does not certify globally optimal mission design across all constraints |
@@ -105,6 +106,8 @@ These are legitimate questions to ask during review:
   before making new scientific claims.
 - Built-in inference benchmarks are serious but not equivalent to a large blind
   ZTF/LSST/NOIRLab labelled-corpus competition.
+- The frozen ALeRCE/ZTF corpus is valuable public alert replay evidence, but it
+  is not a labelled LSST/NOIRLab corpus and should not be scored as one.
 - Operational mission design still belongs in GMAT, Monte, Copernicus, or a
   comparable certified workflow.
 

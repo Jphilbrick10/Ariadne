@@ -1,0 +1,50 @@
+{
+  "acquisition": {
+    "alerce_class": "asteroid",
+    "alerce_classifier": "stamp_classifier",
+    "dec": 18.0,
+    "max_alerts": 50,
+    "mjd_end": 61200.0,
+    "mjd_start": 58000.0,
+    "ra": 77.5,
+    "radius_deg": 18.0
+  },
+  "alert_hash": "f7a68fe855eb1d600448330aba863867c583f19d92febfc14af82a9c9d09bbe7",
+  "alert_path": "data\\benchmarks\\real_corpus_alerce_ztf_asteroid_2026\\alerts.jsonl",
+  "benchmark": null,
+  "benchmark_artifacts": {},
+  "case_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "case_path": "",
+  "created_utc": "2026-06-07T03:08:51.288529+00:00",
+  "n_alerts": 998,
+  "n_cases": 0,
+  "records": [
+    {
+      "error": "",
+      "n_alerts": 998,
+      "n_cases": 0,
+      "n_records": 1,
+      "path_or_url": "https://api.alerce.online/",
+      "source": "alerce_ztf",
+      "status": "ok"
+    }
+  ],
+  "replay": {
+    "action_counts": {},
+    "manifest": "data\\benchmarks\\real_corpus_alerce_ztf_asteroid_2026\\replay_manifest.json",
+    "n_alerts": 998,
+    "n_batches": 454,
+    "n_outputs": 0,
+    "output_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "provenance": "data\\benchmarks\\real_corpus_alerce_ztf_asteroid_2026\\provenance.jsonl",
+    "status_counts": {}
+  },
+  "schema": "ariadne.discovery.real_corpus_manifest.v1",
+  "source_references": {
+    "mpcorb_url": "https://www.minorplanetcenter.net/iau/MPCORB/MPCORB.DAT.gz",
+    "rubin_alert_docs_url": "https://prompt-products.lsst.io/products/alerts/index.html",
+    "rubin_schema_url": "https://sdm-schemas.lsst.io/",
+    "ztf_alert_archive_url": "https://ztf.uw.edu/",
+    "ztf_docs_url": "https://irsa.ipac.caltech.edu/docs/program_interface/ztf_api.html"
+  }
+}
