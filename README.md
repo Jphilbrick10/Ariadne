@@ -183,6 +183,10 @@ for-profit business use including the for-profit arm of a non-profit, paid consu
 building/training commercial AI/ML systems). See [COMMERCIAL-LICENSE.md](COMMERCIAL-LICENSE.md)
 or email **Josh@coherenceenergylabs.com**.
 
+**AI/ML training:** using this code or its outputs to train or develop AI/ML systems for
+commercial purposes requires a commercial license; non-commercial ML research is fine. See
+[AI_POLICY.md](AI_POLICY.md).
+
 Issues + PRs welcome on [GitHub](https://github.com/Jphilbrick10/Ariadne).
 Console commands after install: `ariadne-atlas` (build the open-release atlas bundle) and
 `ariadne-figures` (regenerate all figures).
