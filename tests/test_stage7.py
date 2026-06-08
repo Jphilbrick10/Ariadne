@@ -23,6 +23,7 @@ def test_genesis_halo_period_and_manifold_reaches_earth():
 
 
 def test_ephemeris_libraries_agree():
+    pytest.importorskip("jplephem")  # optional crosscheck extra
     ensure_kernels()
     from jplephem.spk import SPK
 

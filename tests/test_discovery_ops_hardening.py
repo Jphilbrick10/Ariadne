@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import pytest
+
 
 def _alert(i, mjd=60000.0, ra=180.0, dec=0.0):
     from ariadne.discovery.brokers.base import Alert
@@ -125,6 +127,7 @@ def test_run_pipeline_with_provenance_records_hashes(tmp_path: Path):
 
 
 def test_dashboard_ops_api(tmp_path: Path):
+    pytest.importorskip("flask")  # dashboard is an optional feature
     from ariadne.discovery.dashboard import create_app
 
     store = tmp_path / "store.json"
