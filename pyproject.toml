@@ -41,7 +41,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8.0", "pytest-xdist>=3.5", "ruff>=0.15"]
+dev = ["pytest>=8.0", "pytest-xdist>=3.5", "ruff>=0.15", "hypothesis>=6.0"]
 docs = [
     "sphinx>=7.0",
     "furo>=2024.0",

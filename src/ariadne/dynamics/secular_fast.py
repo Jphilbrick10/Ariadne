@@ -27,11 +27,15 @@ except Exception:  # pragma: no cover
     HAVE_NUMBA = False
     prange = range
 
-    def njit(*a, **k):  # no-op decorator
+    def njit(*a, **k):  # no-op decorator (numba absent)
         def wrap(f):
             return f
 
-        return wrap if (a and callable(a[0])) is False else a[0]
+        # bare `@njit` passes the function as a[0]; `@njit(cache=True)` passes only
+        # kwargs (a is empty) and must return the pass-through decorator.
+        if a and callable(a[0]):
+            return a[0]
+        return wrap
 
 
 @njit(cache=True)
