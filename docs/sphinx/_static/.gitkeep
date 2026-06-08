@@ -1,0 +1,2 @@
+# Keeps docs/sphinx/_static/ in version control so Sphinx's html_static_path
+# resolves on a fresh checkout (the directory is otherwise empty).
